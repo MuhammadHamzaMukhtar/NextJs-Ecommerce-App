@@ -19,7 +19,7 @@ const AllProducts = async ({ params }: { params: { product: string } }) => {
     <div className="py-10 mt-16">
       {filteredData &&
         filteredData.map((item: Product) => (
-          <div className="flex gap-x-5">
+          <div className="flex gap-x-5" key={item.id}>
             <div>
               <Image
                 src={item.images[0] as string}
