@@ -1,5 +1,4 @@
 import ProductCard from "@/components/ProductCard";
-import { Products } from "@/utils/mock";
 import React from "react";
 import { client } from "../../../sanity/lib/client";
 

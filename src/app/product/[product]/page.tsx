@@ -1,7 +1,5 @@
-import AddToCart from "@/components/AddToCart";
 import AddToCartAndQuantity from "@/components/AddToCartAndQuantity";
-import Quantity from "@/components/Quantity";
-import { Products, sizes } from "@/utils/mock";
+import { sizes } from "@/utils/mock";
 import Image from "next/image";
 import React from "react";
 import { client } from "../../../../sanity/lib/client";

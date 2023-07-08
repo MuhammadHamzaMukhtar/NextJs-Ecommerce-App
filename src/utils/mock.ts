@@ -1,15 +1,4 @@
-import { FeaturedImage, NavItem, Product } from "./types";
-import p1 from "/public/p1.png";
-import p2 from "/public/p2.png";
-import p3 from "/public/p3.png";
-import p4 from "/public/p10.png";
-import p5 from "/public/p4.png";
-import p6 from "/public/p5.png";
-import p7 from "/public/p6.png";
-import p8 from "/public/p7.png";
-import p9 from "/public/p8.png";
-import p10 from "/public/p9.png";
-import p11 from "/public/p11.png";
+import { FeaturedImage, NavItem } from "./types";
 import f1 from "/public/Featured1.webp";
 import f2 from "/public/Featured2.webp";
 import f3 from "/public/Featured3.webp";
