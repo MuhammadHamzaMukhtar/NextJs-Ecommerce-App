@@ -1,10 +1,9 @@
 "use client";
 import CartQuantity from "@/components/CartQuantity";
 import OrderSummary from "@/components/OrderSummary";
-import Quantity from "@/components/Quantity";
 import { cartActions } from "@/store/Slice/CartSlice";
 import { RootState } from "@/store/store";
-import { DeleteIcon, ShoppingBagIcon, Trash2Icon } from "lucide-react";
+import { ShoppingBagIcon, Trash2Icon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
