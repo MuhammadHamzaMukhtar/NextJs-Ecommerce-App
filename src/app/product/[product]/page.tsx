@@ -37,8 +37,11 @@ const AllProducts = async ({ params }: { params: { product: string } }) => {
                 Select Size
               </h3>
               <div className="flex gap-x-7 mt-3">
-                {sizes.map((size) => (
-                  <span className="font-semibold text-gray-500 text-[14px] w-8 h-8 cursor-pointer rounded-full border flex justify-center items-center hover:shadow-lg">
+                {sizes.map((size, index) => (
+                  <span
+                    key={index}
+                    className="font-semibold text-gray-500 text-[14px] w-8 h-8 cursor-pointer rounded-full border flex justify-center items-center hover:shadow-lg"
+                  >
                     {size}
                   </span>
                 ))}
