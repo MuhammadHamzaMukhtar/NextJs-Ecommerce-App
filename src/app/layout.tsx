@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Providers from "@/components/Provider";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/layout/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
-          <main className="px-28 py-5">
-            <Header />
-            {children}
-            <Toaster />
-            <Footer />
-          </main>
-        </Providers>
+        <ClerkProvider>
+          <Providers>
+            <main className="px-28 py-5">
+              <Header />
+              {children}
+              <Toaster />
+              <Footer />
+            </main>
+          </Providers>
+        </ClerkProvider>
       </body>
     </html>
   );

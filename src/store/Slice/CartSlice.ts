@@ -70,8 +70,8 @@ export const CartSlice = createSlice({
       );
       if (existingProduct) {
         state.totalQuantity -= existingProduct.quantity;
-        state.totalPrice += existingProduct.price;
-        state.cartItems.splice(existingProduct);
+        state.totalPrice -= existingProduct.price;
+        state.cartItems.splice(existingProduct, 1);
       }
     },
   },

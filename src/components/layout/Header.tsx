@@ -5,10 +5,11 @@ import Link from "next/link";
 import { Search, ShoppingCart } from "lucide-react";
 import { NavItems } from "@/utils/mock";
 import CartIcon from "../CartIcon";
+import UserAuth from "../UserAuth";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center">
+    <nav className="flex justify-between items-center">
       <Link href={"/"}>
         <Image src={logo} alt="logo" />
       </Link>
@@ -30,6 +31,7 @@ export default function Header() {
       <Link href={"/cart"}>
         <CartIcon />
       </Link>
-    </header>
+      <UserAuth />
+    </nav>
   );
 }

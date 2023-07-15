@@ -8,22 +8,22 @@ export const NavItems: NavItem[] = [
   {
     id: 1,
     name: "Female",
-    link: "/female",
+    link: "/category/female",
   },
   {
     id: 2,
     name: "Male",
-    link: "/male",
+    link: "/category/male",
   },
   {
     id: 3,
     name: "Kids",
-    link: "/kids",
+    link: "/category/kids",
   },
   {
     id: 4,
     name: "All Products",
-    link: "/products",
+    link: "/category/products",
   },
 ];
 
