@@ -41,7 +41,9 @@ const AllProducts = async ({ params }: { params: { slug: string } }) => {
           </div>
         ))
       ) : (
-        <p>No Products Found</p>
+        <div className="p-20 border shadow-2xl shadow-black rounded-xl bg-gray-100">
+          <p className="text-5xl text-gray-400">No Products Found</p>
+        </div>
       )}
     </div>
   );
