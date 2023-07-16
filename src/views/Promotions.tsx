@@ -14,7 +14,7 @@ const Promotions = () => {
       <h2 className="scroll-m-20 pb-7 text-3xl text-center font-extrabold tracking-tight transition-colors first:mt-0">
         Our Promotions Events
       </h2>
-      <div className="lg:flex lg:items-center lg:justify-center gap-8 space-y-4 ">
+      <div className="lg:flex lg:items-center lg:justify-center gap-8 space-y-4">
         <div className="flex flex-col gap-5">
           <div className="flex bg-[#d6d6d8]">
             <div className="flex flex-col justify-center pl-3">
@@ -25,7 +25,7 @@ const Promotions = () => {
             </div>
             <Image src={e1} alt="Event 1" />
           </div>
-          <div className="flex flex-col bg-black justify-center items-center text-white p-12">
+          <div className="flex flex-col bg-black justify-center items-center text-white p-9">
             <h2 className="scroll-m-20 text-3xl font-extrabold tracking-tight transition-colors first:mt-0 pb-5">
               GET 30% Off
             </h2>

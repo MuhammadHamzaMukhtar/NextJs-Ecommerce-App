@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ClerkProvider>
           <Providers>
-            <main className="px-28 py-5">
+            <main className="px-28 pb-5">
               <Header />
               {children}
               <Toaster />

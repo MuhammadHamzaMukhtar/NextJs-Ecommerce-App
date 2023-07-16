@@ -13,8 +13,8 @@ export default function Header() {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <nav className="w-full bg-white text-black fixed top-0 left-0 right-0 z-10">
-      <div className="flex space-x-8 px-4 lg:mx-20 my-4 items-center lg:px-8">
+    <nav className="w-full bg-white text-black py-3 sticky top-0 z-10">
+      <div className="flex space-x-8 px-4 items-center lg:px-8">
         {!navbar && (
           <div className="flex items-center justify-start   lg:block">
             {/* LOGO */}
@@ -37,7 +37,7 @@ export default function Header() {
                 key={index}
                 className="text-lg font-lg py-2  lg:px-6 text-center border-b-2 lg:border-b-0 lg:hover:bg-transparent"
               >
-                <Link onClick={() => setNavbar(!navbar)} href={item.link}>
+                <Link onClick={() => setNavbar(false)} href={item.link}>
                   {item.name}
                 </Link>
               </li>
