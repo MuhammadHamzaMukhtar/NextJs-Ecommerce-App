@@ -7,14 +7,14 @@ import { Badge } from "@/components/ui/badge";
 
 const Promotions = () => {
   return (
-    <section>
-      <h2 className="scroll-m-20 pb-2 text-xl text-center text-blue-700 font-semibold tracking-tight transition-colors first:mt-0">
+    <div className="lg:py-8  py-20">
+      <h2 className="scroll-m-20 pb-2 text-xl text-center text-blue-700 font-semibold tracking-tight transition-colors first:mt-0 ">
         Promotions
       </h2>
       <h2 className="scroll-m-20 pb-7 text-3xl text-center font-extrabold tracking-tight transition-colors first:mt-0">
         Our Promotions Events
       </h2>
-      <div className="flex justify-between gap-5">
+      <div className="lg:flex lg:items-center lg:justify-center gap-8 space-y-4 ">
         <div className="flex flex-col gap-5">
           <div className="flex bg-[#d6d6d8]">
             <div className="flex flex-col justify-center pl-3">
@@ -33,8 +33,8 @@ const Promotions = () => {
             <Badge className="bg-gray-700 text-md px-8">HAMZAWEEKENDSALE</Badge>
           </div>
         </div>
-        <div className="bg-[#efe1c7]">
-          <div className="px-10">
+        <div className="bg-[#efe1c7] lg:flex-col flex items-center justify-center ">
+          <div className="px-10 ">
             <p className="leading-7 pt-4">Flex Sweatshirt</p>
             <p className="leading-7">
               <span className="line-through">$100.00</span>{" "}
@@ -54,7 +54,7 @@ const Promotions = () => {
           <Image src={e3} alt="Event 3" className="pt-4" />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,10 +1,12 @@
 "use client";
 import CartQuantity from "@/components/CartQuantity";
 import OrderSummary from "@/components/OrderSummary";
+import { Button } from "@/components/ui/button";
 import { cartActions } from "@/store/Slice/CartSlice";
 import { RootState } from "@/store/store";
-import { ShoppingBagIcon, Trash2Icon } from "lucide-react";
+import { ShoppingBagIcon, ShoppingCart, Trash2Icon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -80,9 +82,14 @@ const Cart = () => {
       ) : (
         <div className="flex flex-col gap-y-7 justify-center items-center">
           <ShoppingBagIcon size={100} />
-          <h2 className="scroll-m-20 pb-7 text-3xl font-bold tracking-tight transition-colors first:mt-0">
+          <h2 className="scroll-m-20 pb-3 text-3xl font-bold tracking-tight transition-colors first:mt-0">
             Your shopping bag is empty
           </h2>
+          <Link href={"/category/products"}>
+            <Button className="bg-black mb-14 rounded-xl text-white">
+              <ShoppingCart className="mr-2 h-4 w-4" /> Continue Shopping
+            </Button>
+          </Link>
         </div>
       )}
     </div>

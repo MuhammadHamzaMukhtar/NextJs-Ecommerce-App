@@ -9,9 +9,9 @@ import { FeaturedImages } from "@/utils/mock";
 
 const Hero = () => {
   return (
-    <section className="flex mt-16 mb-7">
+    <section className="lg:flex lg:mt-20 lg:mb-7 ">
       <div className="flex-1 pr-10">
-        <Badge className="bg-blue-100 text-blue-700 text-md mt-16 mb-10">
+        <Badge className="bg-blue-100 text-blue-700 text-md lg:mt-16 mt-6 mb-4 lg:mb-10">
           Sale 70%
         </Badge>
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -32,9 +32,13 @@ const Hero = () => {
           ))}
         </div>
       </div>
-      <div className="flex-1">
-        <div className="bg-[#ffece3] rounded-full p-64 relative"></div>
-        <Image src={header} alt="Header" className="absolute top-[90px]" />
+      <div className="lg:flex-1">
+        <div className="bg-[#ffece3] rounded-full p-64 lg:top-[20px] top-[104px] relative"></div>
+        <Image
+          src={header}
+          alt="Header"
+          className="absolute lg:top-[90px] top-[472px]"
+        />
       </div>
     </section>
   );
