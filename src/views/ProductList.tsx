@@ -2,6 +2,7 @@ import React from "react";
 import ProductCard from "@/components/ProductCard";
 import { client } from "../../sanity/lib/client";
 import { Product } from "@/utils/types";
+import { HomeCarasoul } from "@/components/shares/HomeCarasoul";
 
 export const getProductsData = async () => {
   const products = await client.fetch(`*[_type=="product"]{
@@ -19,7 +20,8 @@ const ProductList = async () => {
       <h2 className="scroll-m-20 pb-7 text-3xl text-center font-extrabold tracking-tight transition-colors first:mt-0">
         Check What We Have
       </h2>
-      <div className="flex justify-between">
+      <HomeCarasoul products={products} />
+      {/* <div className="flex justify-between">
         {products.slice(0, 3).map((product, index) => (
           <ProductCard
             key={index}
@@ -32,7 +34,7 @@ const ProductList = async () => {
             category={product.category}
           />
         ))}
-      </div>
+      </div> */}
     </section>
   );
 };

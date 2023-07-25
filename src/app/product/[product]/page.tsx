@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { client } from "../../../../sanity/lib/client";
 import { Product } from "@/utils/types";
+import ProductDetailsCarousel from "@/components/shares/ProductDetailCarasoul";
 
 const getProductDetail = async (slug: string) => {
   return await client.fetch(`*[_type=="product" && slug.current=="${slug}"]{
@@ -14,18 +15,19 @@ const getProductDetail = async (slug: string) => {
 const AllProducts = async ({ params }: { params: { product: string } }) => {
   const filteredData = await getProductDetail(params.product);
   return (
-    <div className="py-10 mt-16">
+    <div className="py-10 mt-6">
       {filteredData &&
         filteredData.map((item: Product) => (
           <div className="flex gap-x-5" key={item.id}>
-            <div>
+            {/* <div>
               <Image
                 src={item.images[0] as string}
                 alt={item.name}
                 width={400}
                 height={400}
               />
-            </div>
+            </div> */}
+            <ProductDetailsCarousel images={item.images} />
             <div className="mt-7">
               <h2 className="text-2xl">{item.name}</h2>
               <p className="font-semibold text-slate-500 tracking-wide">
