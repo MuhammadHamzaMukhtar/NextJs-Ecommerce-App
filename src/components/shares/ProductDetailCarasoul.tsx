@@ -1,12 +1,9 @@
 "use client";
 import React from "react";
-
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { urlForImage } from "../../../sanity/lib/image";
-import Image from "next/image";
+
 export default function ProductDetailsCarousel({ images }: any) {
-  console.log("images", images);
   return (
     <div>
       <div className="relative text-white text-[20px] w-full max-w-[1060px] mx-auto">

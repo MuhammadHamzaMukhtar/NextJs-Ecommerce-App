@@ -4,10 +4,11 @@ import Image from "next/image";
 import React from "react";
 import logo from "/public/Logo.webp";
 import Link from "next/link";
-import { Search, AlignCenter, XCircle } from "lucide-react";
+import { AlignCenter, XCircle } from "lucide-react";
 import { NavItems } from "@/utils/mock";
 import CartIcon from "../CartIcon";
 import UserAuth from "../UserAuth";
+import Search from "../shares/Search";
 
 export default function Header() {
   const [navbar, setNavbar] = useState(false);
@@ -47,12 +48,7 @@ export default function Header() {
         <div className="flex justify-between items-center gap-x-8">
           {!navbar && (
             <>
-              <div className="border pl-10 relative">
-                <div className="absolute left-[7px] top-[4px]">
-                  <Search size={15} />
-                </div>
-                <input type="text" placeholder="What are you looking for?" />
-              </div>
+              <Search />
               <div
                 className={` flex  justify-end   items-center space-x-2 text-xs  `}
               >
