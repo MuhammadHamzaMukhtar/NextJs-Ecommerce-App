@@ -52,7 +52,7 @@ const Search = () => {
                 </div>
               ) : data.length > 0 ? (
                 data.map((product: any) => (
-                  <Link href={`/product/${product.slug}`}>
+                  <Link href={`/product/${product.slug}`} key={product.id}>
                     <div className="hover:bg-gray-200 cursor-pointer py-2">
                       <div className="grid grid-cols-4 items-center px-5">
                         <Image

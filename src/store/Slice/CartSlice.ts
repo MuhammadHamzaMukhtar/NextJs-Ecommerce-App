@@ -1,15 +1,37 @@
-import { UserProduct } from "@/db/schema/user_products";
 import { Product } from "@/utils/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
+const uniqueId = uuidv4();
 
-export const storeCartData = createAsyncThunk<string>(
+export const fetchTotalQuantity: any = createAsyncThunk(
+  "cart/fetchQuantity",
+  async () => {
+    const userId = localStorage.getItem("user_id");
+    if (!userId) {
+      localStorage.setItem("user_id", uniqueId);
+    }
+    const response = await fetch(
+      `/api/cart/${localStorage.getItem("user_id")}`
+    );
+    const data = await response.json();
+    console.log("dat", data);
+    if (response.status < 200 || response.status >= 300) {
+      return "Something went wrong";
+    }
+    return data;
+  }
+);
+
+export const storeCartData: any = createAsyncThunk(
   "cart/storeData",
-  async (name, { rejectWithValue }) => {
+  async (queryData: any, { rejectWithValue }) => {
     const query = {
-      user_id: 1,
-      product_id: 1,
+      user_id: localStorage.getItem("user_id"),
+      product: queryData.product,
+      quantity: queryData.productQuantity,
     };
+    console.log("query", query);
     const response = await fetch("/api/cart", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -56,14 +78,12 @@ export const CartSlice = createSlice({
         subTotal = newItem.price * quantity;
         newItem.quantity = quantity;
         state.cartItems.push(newItem);
-        state.totalQuantity += quantity;
-        state.totalPrice += subTotal;
       } else {
         subTotal = existingProduct.price * quantity;
         existingProduct.quantity += quantity;
-        state.totalQuantity += quantity;
-        state.totalPrice += subTotal;
       }
+      state.totalQuantity += quantity;
+      state.totalPrice += subTotal;
     },
 
     increamentTotalQuantity: (state, action: PayloadAction<any>) => {
@@ -108,16 +128,27 @@ export const CartSlice = createSlice({
     builder.addCase(storeCartData.pending, (state, action) => {
       state.status = "pending";
     });
+    builder.addCase(fetchTotalQuantity.pending, (state, action) => {
+      state.status = "pending";
+    });
     // When our request is fulfilled:
     // - store the 'fulfilled' state as the status for the corresponding pokemon name
     // - and store the received payload as the data for the corresponding pokemon name
     builder.addCase(storeCartData.fulfilled, (state, action) => {
       state.status = "fulfilled";
-      state.data = action.payload;
+      state.cartItems = action.payload;
+    });
+    builder.addCase(fetchTotalQuantity.fulfilled, (state, action) => {
+      state.status = "fulfilled";
+      state.totalQuantity = parseInt(action.payload[0].quantitySum);
+      state.cartItems = action.payload;
     });
     // When our request is rejected:
     // - store the 'rejected' state as the status for the corresponding pokemon name
     builder.addCase(storeCartData.rejected, (state, action) => {
+      state.status = "rejected";
+    });
+    builder.addCase(fetchTotalQuantity.rejected, (state, action) => {
       state.status = "rejected";
     });
   },

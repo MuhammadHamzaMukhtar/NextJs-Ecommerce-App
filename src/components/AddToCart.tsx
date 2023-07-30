@@ -9,14 +9,28 @@ import toast from "react-hot-toast";
 
 const AddToCart = (item: { product: Product; quantity: number }) => {
   const dispatch = useDispatch();
+  const products = useSelector((state: any) => state.CartSlice.cartItems);
   const { product, quantity } = item;
+  const existingProduct = products.find((i: Product) => i.id === product.id);
+  let productQuantity: number;
+  if (!existingProduct) {
+    productQuantity = quantity;
+  } else {
+    productQuantity = quantity + existingProduct.quantity;
+  }
+  console.log("product", product);
   const addToCart = () => {
     let data = {
       product: product,
       quantity: quantity,
     };
+    const queryData = {
+      product: product,
+      productQuantity: productQuantity,
+    };
+    console.log("queryData", queryData);
     toast.success(`${quantity} ${product.name} added to cart`);
-    // dispatch(storeCartData("ok"));
+    dispatch(storeCartData(queryData));
     dispatch(cartActions.addToCart(data));
   };
   return (

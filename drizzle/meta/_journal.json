@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1690726122013,
+      "tag": "0000_spotty_prima",
+      "breakpoints": true
+    }
+  ]
+}

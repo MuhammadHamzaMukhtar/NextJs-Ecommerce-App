@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import React from "react";
 import logo from "/public/Logo.webp";
@@ -9,9 +9,16 @@ import { NavItems } from "@/utils/mock";
 import CartIcon from "../CartIcon";
 import UserAuth from "../UserAuth";
 import Search from "../shares/Search";
+import { useDispatch } from "react-redux";
+import { fetchTotalQuantity } from "@/store/Slice/CartSlice";
 
 export default function Header() {
+  const dispatch = useDispatch();
   const [navbar, setNavbar] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchTotalQuantity());
+  }, []);
 
   return (
     <nav className="w-full bg-white text-black py-3 sticky top-0 z-10">
