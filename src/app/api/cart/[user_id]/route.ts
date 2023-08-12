@@ -17,7 +17,6 @@ export const GET = async (request: NextRequest) => {
           type: products.type,
           price: products.price,
           quantity: products.quantity,
-          quantitySum: sql<number>`sum(${products.quantity})`,
         })
         .from(products)
         .groupBy(products.id)

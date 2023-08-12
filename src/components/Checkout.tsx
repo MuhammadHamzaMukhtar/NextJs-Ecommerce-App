@@ -1,16 +1,33 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "./ui/button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import getStripePromise from "@/lib/stripe";
 import toast from "react-hot-toast";
 import { useAuth, SignInButton } from "@clerk/nextjs";
+import { cartActions } from "../store/Slice/CartSlice";
 
 const Checkout = () => {
   const { userId } = useAuth();
-  const products = useSelector((state: RootState) => state.CartSlice.cartItems);
+  const dispatch = useDispatch();
+  const products = useSelector(
+    (state: RootState) => state.persistedReducer.cartItems
+  );
+  const shouldCheckout = useSelector(
+    (state: RootState) => state.persistedReducer.checkoutAfterLogin
+  );
+
+  useEffect(() => {
+    if (userId && shouldCheckout && products.length > 0) {
+      handleCheckout();
+    }
+  }, [userId, shouldCheckout, products]);
+
   const handleCheckout = async () => {
+    if (shouldCheckout) {
+      dispatch(cartActions.proceedAfterLogin(false));
+    }
     toast.loading("Redirecting...");
     const stripe = await getStripePromise();
     const result = await fetch("/api/stripe-session", {
@@ -30,7 +47,12 @@ const Checkout = () => {
     </Button>
   ) : (
     <SignInButton mode="modal" afterSignInUrl={`/cart`}>
-      <Button className="bg-black mb-14 text-white">Proceed to Checkout</Button>
+      <Button
+        className="bg-black mb-14 text-white"
+        onClick={() => dispatch(cartActions.proceedAfterLogin(true))}
+      >
+        Proceed to Checkout
+      </Button>
     </SignInButton>
   );
 };

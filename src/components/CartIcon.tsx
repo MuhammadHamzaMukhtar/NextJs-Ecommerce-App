@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const CartIcon = () => {
   const totalQuantity = useSelector(
-    (state: RootState) => state.CartSlice.totalQuantity
+    (state: RootState) => state.persistedReducer.totalQuantity
   );
   return (
     <div className="bg-gray-200 p-3 rounded-full relative">

@@ -10,15 +10,14 @@ import CartIcon from "../CartIcon";
 import UserAuth from "../UserAuth";
 import Search from "../shares/Search";
 import { useDispatch } from "react-redux";
-import { fetchTotalQuantity } from "@/store/Slice/CartSlice";
 
 export default function Header() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [navbar, setNavbar] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchTotalQuantity());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchTotalQuantity());
+  // }, []);
 
   return (
     <nav className="w-full bg-white text-black py-3 sticky top-0 z-10">

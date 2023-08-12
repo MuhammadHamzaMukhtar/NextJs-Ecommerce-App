@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state: RootState) => state.CartSlice.cartItems);
+  const items = useSelector((state: RootState) => state.persistedReducer.cartItems);
   const totalQuantity = useSelector(
-    (state: RootState) => state.CartSlice.totalQuantity
+    (state: RootState) => state.persistedReducer.totalQuantity
   );
   const handleRemoveItem = (id: number) => {
     dispatch(cartActions.removeItem(id));

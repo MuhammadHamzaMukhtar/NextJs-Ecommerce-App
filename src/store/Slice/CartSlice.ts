@@ -4,63 +4,63 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 const uniqueId = uuidv4();
 
-export const fetchTotalQuantity: any = createAsyncThunk(
-  "cart/fetchQuantity",
-  async () => {
-    const userId = localStorage.getItem("user_id");
-    if (!userId) {
-      localStorage.setItem("user_id", uniqueId);
-    }
-    const response = await fetch(
-      `/api/cart/${localStorage.getItem("user_id")}`
-    );
-    const data = await response.json();
-    console.log("dat", data);
-    if (response.status < 200 || response.status >= 300) {
-      return "Something went wrong";
-    }
-    return data;
-  }
-);
+// export const fetchTotalQuantity: any = createAsyncThunk(
+//   "cart/fetchQuantity",
+//   async () => {
+//     const userId = localStorage.getItem("user_id");
+//     if (!userId) {
+//       localStorage.setItem("user_id", uniqueId);
+//     }
+//     const response = await fetch(
+//       `/api/cart/${localStorage.getItem("user_id")}`
+//     );
+//     const data = await response.json();
+//     console.log("dat", data);
+//     if (response.status < 200 || response.status >= 300) {
+//       return "Something went wrong";
+//     }
+//     return data;
+//   }
+// );
 
-export const storeCartData: any = createAsyncThunk(
-  "cart/storeData",
-  async (queryData: any, { rejectWithValue }) => {
-    const query = {
-      user_id: localStorage.getItem("user_id"),
-      product: queryData.product,
-      quantity: queryData.productQuantity,
-    };
-    console.log("query", query);
-    const response = await fetch("/api/cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      cache: "no-cache",
-      body: JSON.stringify(query),
-    });
-    const data = await response.json();
-    console.log("data", data);
-    if (response.status < 200 || response.status >= 300) {
-      return rejectWithValue(data);
-    }
-    return data;
-  }
-);
+// export const storeCartData: any = createAsyncThunk(
+//   "cart/storeData",
+//   async (queryData: any, { rejectWithValue }) => {
+//     const query = {
+//       user_id: localStorage.getItem("user_id"),
+//       product: queryData.product,
+//       quantity: queryData.productQuantity,
+//     };
+//     console.log("query", query);
+//     const response = await fetch("/api/cart", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       cache: "no-cache",
+//       body: JSON.stringify(query),
+//     });
+//     const data = await response.json();
+//     console.log("data", data);
+//     if (response.status < 200 || response.status >= 300) {
+//       return rejectWithValue(data);
+//     }
+//     return data;
+//   }
+// );
 
 export interface CartState {
   totalQuantity: number;
   totalPrice: number;
   cartItems: Array<any>;
   status: string;
-  data: string;
+  checkoutAfterLogin: boolean;
 }
 
 const initialState: CartState = {
   totalQuantity: 0,
   totalPrice: 0,
+  checkoutAfterLogin: false,
   cartItems: [],
   status: "",
-  data: "",
 };
 
 export const CartSlice = createSlice({
@@ -121,37 +121,48 @@ export const CartSlice = createSlice({
         state.cartItems.splice(existingProduct, 1);
       }
     },
+
+    proceedAfterLogin: (state, action: PayloadAction<boolean>) => {
+      state.checkoutAfterLogin = action.payload;
+    },
+
+    resetCart: (state) => {
+      return initialState;
+    },
   },
-  extraReducers: (builder) => {
-    // When our request is pending:
-    // - store the 'pending' state as the status for the corresponding pokemon name
-    builder.addCase(storeCartData.pending, (state, action) => {
-      state.status = "pending";
-    });
-    builder.addCase(fetchTotalQuantity.pending, (state, action) => {
-      state.status = "pending";
-    });
-    // When our request is fulfilled:
-    // - store the 'fulfilled' state as the status for the corresponding pokemon name
-    // - and store the received payload as the data for the corresponding pokemon name
-    builder.addCase(storeCartData.fulfilled, (state, action) => {
-      state.status = "fulfilled";
-      state.cartItems = action.payload;
-    });
-    builder.addCase(fetchTotalQuantity.fulfilled, (state, action) => {
-      state.status = "fulfilled";
-      state.totalQuantity = parseInt(action.payload[0].quantitySum);
-      state.cartItems = action.payload;
-    });
-    // When our request is rejected:
-    // - store the 'rejected' state as the status for the corresponding pokemon name
-    builder.addCase(storeCartData.rejected, (state, action) => {
-      state.status = "rejected";
-    });
-    builder.addCase(fetchTotalQuantity.rejected, (state, action) => {
-      state.status = "rejected";
-    });
-  },
+  // extraReducers: (builder) => {
+  //   // When our request is pending:
+  //   // - store the 'pending' state as the status for the corresponding pokemon name
+  //   builder.addCase(storeCartData.pending, (state) => {
+  //     state.status = "pending";
+  //   });
+  //   builder.addCase(fetchTotalQuantity.pending, (state) => {
+  //     state.status = "pending";
+  //   });
+  //   // When our request is fulfilled:
+  //   // - store the 'fulfilled' state as the status for the corresponding pokemon name
+  //   // - and store the received payload as the data for the corresponding pokemon name
+  //   builder.addCase(storeCartData.fulfilled, (state, action) => {
+  //     state.status = "fulfilled";
+  //     state.cartItems = action.payload;
+  //   });
+  //   builder.addCase(fetchTotalQuantity.fulfilled, (state, action) => {
+  //     state.status = "fulfilled";
+  //     state.totalQuantity = 0;
+  //     action.payload.map((product: any) => {
+  //       state.totalQuantity += parseInt(product.quantity);
+  //     });
+  //     state.cartItems = action.payload;
+  //   });
+  //   // When our request is rejected:
+  //   // - store the 'rejected' state as the status for the corresponding pokemon name
+  //   builder.addCase(storeCartData.rejected, (state) => {
+  //     state.status = "rejected";
+  //   });
+  //   builder.addCase(fetchTotalQuantity.rejected, (state) => {
+  //     state.status = "rejected";
+  //   });
+  // },
 });
 
 // Action creators are generated for each case reducer function

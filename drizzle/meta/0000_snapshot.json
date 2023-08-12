@@ -1,9 +1,37 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "8755a061-0b50-465b-9b5d-863b8c9b9a1b",
+  "id": "d5f78262-dcfc-44d7-8192-d0b5ad22c9a1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "productImages": {
+      "name": "productImages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "productId": {
+          "name": "productId",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "imageUrl": {
+          "name": "imageUrl",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "products": {
       "name": "products",
       "schema": "",
@@ -14,8 +42,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
+        "userId": {
+          "name": "userId",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true

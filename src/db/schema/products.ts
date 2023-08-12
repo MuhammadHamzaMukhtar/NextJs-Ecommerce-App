@@ -3,7 +3,7 @@ import { InferModel } from "drizzle-orm";
 
 export const products = pgTable("products", {
   id: integer("id").notNull().primaryKey(),
-  user_id: varchar("user_id", { length: 256 }).notNull(),
+  user_id: varchar("userId", { length: 256 }).notNull(),
   category: text("category", { enum: ["male", "female", "kids"] }),
   name: varchar("name", { length: 256 }).notNull(),
   slug: varchar("slug", { length: 256 }).notNull(),

@@ -6,9 +6,11 @@ import Checkout from "./Checkout";
 
 const OrderSummary = () => {
   const quantity = useSelector(
-    (state: RootState) => state.CartSlice.totalQuantity
+    (state: RootState) => state.persistedReducer.totalQuantity
   );
-  const price = useSelector((state: RootState) => state.CartSlice.totalPrice);
+  const price = useSelector(
+    (state: RootState) => state.persistedReducer.totalPrice
+  );
   return (
     <div className="space-y-6">
       <div className="flex gap-x-10">

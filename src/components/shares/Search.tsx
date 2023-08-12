@@ -24,10 +24,12 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const handleSearchProducts = async (e: any) => {
-    setIsLoading(true);
-    const products = await getProducts(e.target.value);
-    setData(products);
-    setIsLoading(false);
+    if (e.target.value.length > 0) {
+      setIsLoading(true);
+      const products = await getProducts(e.target.value);
+      setData(products);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -37,11 +39,8 @@ const Search = () => {
         <DialogHeader>
           <DialogTitle>Search Products</DialogTitle>
           <DialogDescription>
-            <Input
-              onChange={handleSearchProducts}
-              className="border-gray-200"
-            />
-            <div className="border border-gray-200 border-t-0 max-h-48 overflow-auto">
+            <Input onChange={handleSearchProducts} className="border-black" />
+            <div className="border border-black border-t-0 max-h-48 overflow-auto">
               {isLoading ? (
                 <div className="flex items-center space-x-4 p-5">
                   <Skeleton className="h-12 w-12 rounded-full" />
