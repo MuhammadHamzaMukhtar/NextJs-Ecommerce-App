@@ -8,7 +8,13 @@ import { useDispatch } from "react-redux";
 
 const SuccessPage = () => {
   const dispatch = useDispatch();
+
+  const saveOrder= async () => {
+    await fetch('/api/')
+  }
+
   useEffect(() => {
+    saveOrder()
     dispatch(cartActions.resetCart());
   }, []);
 

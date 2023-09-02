@@ -8,9 +8,10 @@ export const products = pgTable("products", {
   name: varchar("name", { length: 256 }).notNull(),
   slug: varchar("slug", { length: 256 }).notNull(),
   type: varchar("type", { length: 256 }).notNull(),
+  image: varchar("image",  { length: 256 }),
   price: integer("price").notNull(),
   quantity: integer("quantity").notNull().default(1),
 });
 
-export type UserProduct = InferModel<typeof products>; // return type when queried
-export type NewUserProduct = InferModel<typeof products, "insert">; // insert type
+export type UserProduct = InferModel<typeof products>;
+export type NewUserProduct = InferModel<typeof products, "insert">;

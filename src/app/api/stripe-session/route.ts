@@ -8,7 +8,8 @@ const stripe = new Stripe(key, {
 });
 
 export const POST = async (request: NextRequest) => {
-  const products = await request.json();
+  const { products, userEmail } = await request.json();
+  console.log('userEmail', userEmail)
   try {
     if (products.length > 0) {
       const session = await stripe.checkout.sessions.create({
@@ -43,8 +44,9 @@ export const POST = async (request: NextRequest) => {
         phone_number_collection: {
           enabled: true,
         },
+        customer_email: userEmail,
         success_url: `${request.headers.get("origin")}/successPay`,
-        cancel_url: `${request.headers.get("origin")}/cart/?canceled=true`,
+        cancel_url: `${request.headers.get("origin")}/cart`,
       });
       return NextResponse.json({ session });
     } else {

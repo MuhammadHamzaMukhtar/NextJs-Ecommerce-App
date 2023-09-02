@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "generate": "drizzle-kit generate:pg",
-    "db-migrate": "node -r esbuild-register src/lib/migration.ts"
+    "db-migrate": "node -r esbuild-register src/lib/migration.ts",
+    "drop": "drizzle-kit drop --out=drizzle"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.21.15",

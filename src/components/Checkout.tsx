@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import getStripePromise from "@/lib/stripe";
 import toast from "react-hot-toast";
-import { useAuth, SignInButton } from "@clerk/nextjs";
+import { useAuth, SignInButton,useUser  } from "@clerk/nextjs";
 import { cartActions } from "../store/Slice/CartSlice";
 
 const Checkout = () => {
   const { userId } = useAuth();
   const dispatch = useDispatch();
+  const {user}=useUser()
   const products = useSelector(
     (state: RootState) => state.persistedReducer.cartItems
   );
@@ -33,7 +34,8 @@ const Checkout = () => {
     const result = await fetch("/api/stripe-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(products),
+      body: JSON.stringify({products: products, userEmail: user?.primaryEmailAddress?.emailAddress
+      }),
       cache: "no-cache",
     });
     const response = await result.json();

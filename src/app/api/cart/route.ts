@@ -1,4 +1,3 @@
-import { productImages } from "@/db/schema/productImages";
 import { products } from "@/db/schema/products";
 import { db } from "@/lib/drizzle";
 import { and, asc, eq, sql } from "drizzle-orm";
