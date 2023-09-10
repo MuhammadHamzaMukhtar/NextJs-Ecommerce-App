@@ -22,7 +22,6 @@ export const GET = async (request: NextRequest) => {
         .groupBy(products.id)
         .where(eq(products.user_id, userId));
       if (userProducts) {
-        console.log("userProducts", userProducts);
         return NextResponse.json(userProducts);
       } else {
         return NextResponse.json(

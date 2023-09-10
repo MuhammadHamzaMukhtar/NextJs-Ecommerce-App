@@ -10,7 +10,7 @@ const SuccessPage = () => {
   const dispatch = useDispatch();
 
   const saveOrder= async () => {
-    await fetch('/api/')
+    // await fetch('/api/')
   }
 
   useEffect(() => {

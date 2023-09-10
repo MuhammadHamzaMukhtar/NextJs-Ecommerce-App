@@ -25,6 +25,11 @@ export const NavItems: NavItem[] = [
     name: "All Products",
     link: "/category/products",
   },
+  {
+    id: 4,
+    name: "Invoices",
+    link: "/invoices",
+  },
 ];
 
 export const FeaturedImages: FeaturedImage[] = [

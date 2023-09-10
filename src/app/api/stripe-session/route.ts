@@ -9,10 +9,36 @@ const stripe = new Stripe(key, {
 
 export const POST = async (request: NextRequest) => {
   const { products, userEmail } = await request.json();
-  console.log('userEmail', userEmail)
+
   try {
+    let customer;
+    try {
+      customer = await stripe.customers.list({
+        email: userEmail,
+        limit: 1,
+      });
+    } catch (customerError: any) {
+      throw new Error(`Error checking customer: ${customerError.message}`);
+    }
+
+    let customerId;
+
+    if (customer.data.length > 0) {
+      customerId = customer.data[0].id;
+    } else {
+      try {
+        const newCustomer = await stripe.customers.create({
+          email: userEmail,
+        });
+        customerId = newCustomer.id;
+      } catch (createCustomerError: any) {
+        throw new Error(`Error creating customer: ${createCustomerError.message}`);
+      }
+    }
+
     if (products.length > 0) {
       const session = await stripe.checkout.sessions.create({
+        customer: customerId,
         submit_type: "pay",
         mode: "payment",
         payment_method_types: ["card"],
@@ -44,7 +70,6 @@ export const POST = async (request: NextRequest) => {
         phone_number_collection: {
           enabled: true,
         },
-        customer_email: userEmail,
         success_url: `${request.headers.get("origin")}/successPay`,
         cancel_url: `${request.headers.get("origin")}/cart`,
       });
